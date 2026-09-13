@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>libreble — your devices, without their vendors</title>
+  <meta name="description" content="Web apps that talk to your Bluetooth devices directly, in Chrome, with no vendor account, no vendor app and no cloud — and document the protocols so anyone can build on them.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="libreble — your devices, without their vendors">
+  <meta property="og:description" content="Account-less, cloud-less web apps for Bluetooth devices, plus the documented protocols behind them.">
+  <meta property="og:url" content="https://libreble.github.io/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://libreble.github.io/">
+  <style>
+    :root {
+      --bg: #f6f7f5;
+      --surface: #ffffff;
+      --text: #171a1d;
+      --muted: #5b6168;
+      --border: #e2e4e0;
+      --accent: #0e8f7e;
+      --accent-ink: #ffffff;
+      --live-bg: #e3f6ee;   --live-fg: #0b6b3e;
+      --soon-bg: #e6f2fb;   --soon-fg: #0f4f8a;
+      --wip-bg:  #fff2d9;   --wip-fg:  #7a4b00;
+      --plan-bg: #eceeef;   --plan-fg: #4a5158;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0f14;
+        --surface: #121821;
+        --text: #e6e8eb;
+        --muted: #98a2ad;
+        --border: #1f2a36;
+        --accent: #2dd4bf;
+        --accent-ink: #06201c;
+        --live-bg: #0f2e22; --live-fg: #6ee7b7;
+        --soon-bg: #0f2438; --soon-fg: #7cc4ff;
+        --wip-bg:  #33240a; --wip-fg:  #fbbf24;
+        --plan-bg: #1a222c; --plan-fg: #aab4bf;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
+      padding-inline: 20px;
+    }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    a:hover { text-decoration-thickness: 2px; }
+    main { max-width: 860px; margin: 0 auto; }
+
+    header.hero { padding-block: 56px 32px; }
+    .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+    .brand svg { width: 36px; height: 36px; flex: none; }
+    .brand .word { font-weight: 700; font-size: 22px; letter-spacing: -0.01em; }
+    .brand .word b { color: var(--accent); font-weight: 700; }
+    h1 { font-size: clamp(30px, 5.5vw, 44px); line-height: 1.12; letter-spacing: -0.02em; margin: 0 0 16px; }
+    .lede { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 40em; margin: 0; }
+    .lede strong { color: var(--text); font-weight: 600; }
+
+    section { padding-block: 32px; border-top: 1px solid var(--border); }
+    h2 { font-size: 22px; letter-spacing: -0.01em; margin: 0 0 6px; }
+    .sub { color: var(--muted); margin: 0 0 20px; }
+
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .card .device { color: var(--muted); font-size: 13px; letter-spacing: .02em; text-transform: uppercase; }
+    .card h3 { margin: 0; font-size: 19px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; flex: 1; }
+    .card .links { display: flex; gap: 14px; flex-wrap: wrap; font-size: 15px; margin-top: 4px; }
+    .card .links .primary {
+      background: var(--accent); color: var(--accent-ink);
+      padding: 6px 12px; border-radius: 999px; text-decoration: none; font-weight: 600;
+    }
+    .card .links .primary:hover { filter: brightness(1.08); }
+
+    .badge {
+      font-size: 12px; font-weight: 600; letter-spacing: .02em;
+      padding: 2px 9px; border-radius: 999px; white-space: nowrap;
+    }
+    .badge.live { background: var(--live-bg); color: var(--live-fg); }
+    .badge.soon { background: var(--soon-bg); color: var(--soon-fg); }
+    .badge.wip  { background: var(--wip-bg);  color: var(--wip-fg); }
+    .badge.plan { background: var(--plan-bg); color: var(--plan-fg); }
+
+    .how { display: grid; gap: 18px 28px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .how h3 { margin: 0 0 4px; font-size: 16px; }
+    .how p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    .req { display: flex; gap: 10px; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
+    .req li { border: 1px solid var(--border); background: var(--surface); border-radius: 10px; padding: 8px 12px; font-size: 15px; }
+    .req li.no { color: var(--muted); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent); }
+    .req li.no::before { content: "✕ "; text-decoration: none; display: inline-block; }
+    .req li.yes::before { content: "✓ "; color: var(--accent); font-weight: 700; }
+    .note { color: var(--muted); font-size: 15px; margin: 14px 0 0; }
+
+    ol.steps { margin: 0; padding-left: 1.3em; color: var(--muted); }
+    ol.steps li { margin-bottom: 8px; }
+    ol.steps li strong { color: var(--text); font-weight: 600; }
+    code { font: 14px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1px 5px; }
+
+    footer { padding-block: 32px 48px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
+    footer p { margin: 0 0 8px; }
+  </style>
+</head>
+<body>
+<main>
+
+  <header class="hero">
+    <div class="brand" aria-hidden="true">
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+        <!-- three radio arcs with an open, unlatched gap: a signal that isn't locked -->
+        <path d="M24 44 a12 12 0 0 1 0-24" style="color: var(--accent)"/>
+        <path d="M16 52 a24 24 0 0 1 0-40" style="color: var(--accent)" opacity=".7"/>
+        <path d="M8 60 a36 36 0 0 1 0-56" style="color: var(--accent)" opacity=".4"/>
+        <path d="M34 32 h22 M48 24 l8 8 -8 8"/>
+      </svg>
+      <span class="word">libre<b>ble</b></span>
+    </div>
+    <h1>Your devices, without their vendors.</h1>
+    <p class="lede">
+      Bluetooth gadgets ship with an app that wants an account, a cloud, and your data.
+      libreble is a collection of web apps that talk to those devices <strong>directly, in your
+      browser</strong> — no account, no app store, no server. Each one also
+      <strong>documents the device's protocol</strong> so anyone can build on it.
+    </p>
+  </header>
+
+  <section id="devices">
+    <h2>Liberated devices</h2>
+    <p class="sub">Every app runs on its own page under this site and is a standalone repo on GitHub.</p>
+    <div class="grid">
+
+      <!--
+        To add a device, copy one card. Badges: live · soon · wip · plan.
+        Links: the app page (primary), its PROTOCOL.md, and the repo.
+      -->
+
+      <article class="card">
+        <div class="device">ICG IC-6 indoor bike</div>
+        <h3>Bikefit <span class="badge live">Live</span></h3>
+        <p>Live power, cadence, heart rate and zones; full session history on your device;
+          TCX export to Strava, intervals.icu and friends. Talks the bike's own protocol over
+          Nordic UART.</p>
+        <div class="links">
+          <a class="primary" href="https://libreble.github.io/bikefit/">Open app</a>
+          <a href="https://github.com/libreble/bikefit/blob/main/PROTOCOL.md">Protocol</a>
+          <a href="https://github.com/libreble/bikefit">Source</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="device">Oral-B iO toothbrush</div>
+        <h3>Brushlog <span class="badge soon">Publishing soon</span></h3>
+        <p>Syncs the brushing history the brush already stores — no pairing, no P&amp;G
+          account. Live pressure and timer, brush-head wear, streaks and trends. Verified on
+          hardware; Genius and Smart lines covered too.</p>
+      </article>
+
+      <article class="card">
+        <div class="device">Dremel 8260 rotary tool</div>
+        <h3>Dremel 8260 <span class="badge wip">In progress</span></h3>
+        <p>Battery, speed control with the tool's confirm handshake, temperature status, and the
+          accessory &amp; material guide — which bit at which speed. Works on hardware; being
+          packaged as an installable app.</p>
+      </article>
+
+      <article class="card">
+        <div class="device">Bluetooth multimeters</div>
+        <h3>Multimeters <span class="badge plan">Planned</span></h3>
+        <p>One app for meters from several vendors, with multiple meters connected and charted
+          at once.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <p class="sub">Three rules every libreble app follows.</p>
+    <div class="how">
+      <div>
+        <h3>Direct to the device</h3>
+        <p>The browser speaks Bluetooth to the device itself through
+          <a href="https://developer.mozilla.org/docs/Web/API/Web_Bluetooth_API">Web Bluetooth</a>.
+          Nothing sits in between — no vendor server, no relay, no login.</p>
+      </div>
+      <div>
+        <h3>Your data stays yours</h3>
+        <p>Everything is stored in the browser on your device. Export it as a plain JSON file,
+          import it elsewhere, delete it whenever. No network requests at runtime.</p>
+      </div>
+      <div>
+        <h3>Installable, works offline</h3>
+        <p>Each app is a PWA: add it to your home screen once and it opens without a connection,
+          like any other app — minus the app store.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="requirements">
+    <h2>What you need</h2>
+    <p class="sub">Web Bluetooth is a Chromium feature, so the browser matters more than the device.</p>
+    <ul class="req">
+      <li class="yes">Chrome on Android</li>
+      <li class="yes">Chrome or Edge on desktop</li>
+      <li class="no">Safari (incl. every browser on iOS)</li>
+      <li class="no">Firefox</li>
+    </ul>
+    <p class="note">On iPhone and iPad a Web Bluetooth-capable browser such as Bluefy can work,
+      but it isn't a supported target.</p>
+  </section>
+
+  <section id="contribute">
+    <h2>Liberate a device</h2>
+    <p class="sub">Have a gadget held hostage by its app? Each device is its own repo with the same shape.</p>
+    <ol class="steps">
+      <li><strong>Reverse-engineer the protocol</strong> from the official app or captured traffic,
+        and write it up as a <code>PROTOCOL.md</code> other people can implement from. The write-up
+        counts as much as the app.</li>
+      <li><strong>Build the PWA</strong>: a pure protocol layer with no UI dependencies, a real
+        Web Bluetooth transport plus a mock so the UI works without hardware, local storage with
+        JSON export, a manifest and a service worker.</li>
+      <li><strong>Deploy to GitHub Pages</strong> under <code>libreble.github.io/&lt;repo&gt;/</code>
+        and add a card above.</li>
+    </ol>
+    <p class="note"><a href="https://github.com/libreble/bikefit">Bikefit</a> is the reference
+      layout to copy. Everything lives at
+      <a href="https://github.com/libreble">github.com/libreble</a>.</p>
+  </section>
+
+  <footer>
+    <p>libreble is an independent, unofficial project. It is not affiliated with or endorsed by
+      any device maker; product names belong to their respective owners.</p>
+    <p>The apps reproduce only the on-air Bluetooth protocols, derived from public
+      reverse-engineering for interoperability and personal-data ownership. No vendor code is
+      included.</p>
+  </footer>
+
+</main>
+</body>
+</html>
