@@ -11,6 +11,7 @@ Each device app is its own repo and deploys to its own GitHub Pages folder
 | [Bikefit](https://libreble.github.io/bikefit/) | ICG IC-6 indoor bike | [libreble/bikefit](https://github.com/libreble/bikefit) |
 | [Brushlog](https://libreble.github.io/brushlog/) | Oral-B toothbrush | [libreble/brushlog](https://github.com/libreble/brushlog) |
 | [COLLET](https://libreble.github.io/collet/) | Dremel 8260 rotary tool | [libreble/collet](https://github.com/libreble/collet) |
+| [Multimeter](https://libreble.github.io/multimeter/) | Bluetooth multimeters (UNI-T, OWON, Aneng, BSIDE/ZOYI, Voltcraft, AICARE) | [libreble/multimeter](https://github.com/libreble/multimeter) |
 
 ## Editing
 
