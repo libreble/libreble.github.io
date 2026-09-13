@@ -4,217 +4,602 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>libreble — your devices, without their vendors</title>
-  <meta name="description" content="Web apps that talk to your Bluetooth devices directly, in Chrome, with no vendor account, no vendor app and no cloud — and document the protocols so anyone can build on them.">
-  <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="libreble — your devices, without their vendors">
-  <meta property="og:description" content="Account-less, cloud-less web apps for Bluetooth devices, plus the documented protocols behind them.">
-  <meta property="og:url" content="https://libreble.github.io/">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta name="description" content="Web apps that talk to your Bluetooth devices directly over Web Bluetooth in Chrome — no vendor account, no app, no cloud — with every protocol documented.">
   <link rel="canonical" href="https://libreble.github.io/">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f3f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1216" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="libreble">
+  <meta property="og:title" content="libreble — your devices, without their vendors">
+  <meta property="og:description" content="Web apps that talk to Bluetooth gadgets directly, in Chrome. No vendor account, no vendor app, no cloud — and every protocol documented.">
+  <meta property="og:url" content="https://libreble.github.io/">
+  <meta property="og:image" content="https://libreble.github.io/og/libreble.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The libreble beacon mark next to the words: Your devices, without their vendors.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="libreble — your devices, without their vendors">
+  <meta name="twitter:description" content="Web apps that talk to Bluetooth gadgets directly, in Chrome. No vendor account, no vendor app, no cloud — and every protocol documented.">
+  <meta name="twitter:image" content="https://libreble.github.io/og/libreble.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "libreble",
+        "url": "https://libreble.github.io/",
+        "description": "Web apps that talk to Bluetooth devices directly over Web Bluetooth in Chrome, with no vendor account, no vendor app and no cloud, and document each device's protocol so anyone can build on it."
+      },
+      {
+        "@type": "ItemList",
+        "name": "Liberated devices",
+        "itemListOrder": "https://schema.org/ItemListUnordered",
+        "numberOfItems": 4,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "SoftwareApplication",
+              "name": "Bikefit",
+              "url": "https://libreble.github.io/bikefit/",
+              "description": "Live power, cadence, heart rate and zones for the ICG IC-6 indoor bike, with session history on your device and TCX export.",
+              "applicationCategory": "UtilitiesApplication",
+              "operatingSystem": "Chrome on Android, Windows, macOS, Linux, ChromeOS",
+              "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+              "isAccessibleForFree": true,
+              "license": "https://opensource.org/licenses/MIT"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "SoftwareApplication",
+              "name": "Brushlog",
+              "url": "https://libreble.github.io/brushlog/",
+              "description": "Syncs the brushing history an Oral-B iO toothbrush already stores, with live pressure, timer, brush-head wear, streaks and trends. No pairing, no P&G account.",
+              "applicationCategory": "UtilitiesApplication",
+              "operatingSystem": "Chrome on Android, Windows, macOS, Linux, ChromeOS",
+              "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+              "isAccessibleForFree": true,
+              "license": "https://opensource.org/licenses/MIT"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "SoftwareApplication",
+              "name": "COLLET",
+              "url": "https://libreble.github.io/collet/",
+              "description": "Live battery, speed and health from the Dremel 8260 rotary tool, speed control, and an accessory and material speed guide.",
+              "applicationCategory": "UtilitiesApplication",
+              "operatingSystem": "Chrome on Android, Windows, macOS, Linux, ChromeOS",
+              "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+              "isAccessibleForFree": true,
+              "license": "https://opensource.org/licenses/MIT"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@type": "SoftwareApplication",
+              "name": "Multimeter",
+              "url": "https://libreble.github.io/multimeter/",
+              "description": "Live readout, charting, statistics, recording and CSV/PNG export for Bluetooth multimeters from UNI-T, OWON, Aneng, BSIDE/ZOYI, Voltcraft and AICARE.",
+              "applicationCategory": "UtilitiesApplication",
+              "operatingSystem": "Chrome on Android, Windows, macOS, Linux, ChromeOS",
+              "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+              "isAccessibleForFree": true,
+              "license": "https://opensource.org/licenses/MIT"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Theme override hook for testing: ?theme=dark or ?theme=light sets html[data-theme]. Harmless otherwise. -->
+  <script>
+    (function () {
+      var t = new URLSearchParams(location.search).get("theme");
+      if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
   <style>
+    /* ------------------------------------------------------------------
+       Tokens. Light is the base; dark redefines the same names twice:
+       once for the OS preference (unless data-theme="light" forces light),
+       once for an explicit data-theme="dark".
+       ------------------------------------------------------------------ */
     :root {
-      --bg: #f6f7f5;
+      --paper: #f3f5f7;
       --surface: #ffffff;
-      --text: #171a1d;
-      --muted: #5b6168;
-      --border: #e2e4e0;
-      --accent: #0e8f7e;
-      --accent-ink: #ffffff;
-      --live-bg: #e3f6ee;   --live-fg: #0b6b3e;
-      --soon-bg: #e6f2fb;   --soon-fg: #0f4f8a;
-      --wip-bg:  #fff2d9;   --wip-fg:  #7a4b00;
-      --plan-bg: #eceeef;   --plan-fg: #4a5158;
+      --ink: #151a20;
+      --ink-2: #3a444f;
+      --muted: #5b6673;
+      --line: #d8dee5;
+      --line-strong: #aeb8c3;
+      --led: #c2410c;          /* accent for text and links */
+      --led-fill: #f26b1d;     /* accent for fills: the LED itself */
+      --on-led: #180d04;
+      --led-soft: rgba(242, 107, 29, 0.13);
     }
     @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0b0f14;
-        --surface: #121821;
-        --text: #e6e8eb;
-        --muted: #98a2ad;
-        --border: #1f2a36;
-        --accent: #2dd4bf;
-        --accent-ink: #06201c;
-        --live-bg: #0f2e22; --live-fg: #6ee7b7;
-        --soon-bg: #0f2438; --soon-fg: #7cc4ff;
-        --wip-bg:  #33240a; --wip-fg:  #fbbf24;
-        --plan-bg: #1a222c; --plan-fg: #aab4bf;
+      :root:not([data-theme="light"]) {
+        --paper: #0e1216;
+        --surface: #161b21;
+        --ink: #e9edf1;
+        --ink-2: #c4cdd6;
+        --muted: #98a4b1;
+        --line: #2a323c;
+        --line-strong: #46515d;
+        --led: #ffa259;
+        --led-fill: #ff8a3d;
+        --on-led: #180d04;
+        --led-soft: rgba(255, 138, 61, 0.16);
       }
     }
+    :root[data-theme="dark"] {
+      --paper: #0e1216;
+      --surface: #161b21;
+      --ink: #e9edf1;
+      --ink-2: #c4cdd6;
+      --muted: #98a4b1;
+      --line: #2a323c;
+      --line-strong: #46515d;
+      --led: #ffa259;
+      --led-fill: #ff8a3d;
+      --on-led: #180d04;
+      --led-soft: rgba(255, 138, 61, 0.16);
+    }
 
-    * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
+    /* ---- base ---- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
-      padding-inline: 20px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Archivo, "Helvetica Neue", Arial, sans-serif;
+      font-size: 1.0625rem;
+      line-height: 1.55;
+      padding-inline: clamp(16px, 4.5vw, 48px);
+      font-feature-settings: "kern";
     }
-    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    main { max-width: 1120px; margin: 0 auto; }
+    a { color: var(--led); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
     a:hover { text-decoration-thickness: 2px; }
-    main { max-width: 860px; margin: 0 auto; }
+    :focus-visible { outline: 2px solid var(--led); outline-offset: 3px; border-radius: 2px; }
+    h1, h2, h3 { margin: 0; text-wrap: balance; }
+    p { margin: 0; }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-    header.hero { padding-block: 56px 32px; }
-    .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
-    .brand svg { width: 36px; height: 36px; flex: none; }
-    .brand .word { font-weight: 700; font-size: 22px; letter-spacing: -0.01em; }
-    .brand .word b { color: var(--accent); font-weight: 700; }
-    h1 { font-size: clamp(30px, 5.5vw, 44px); line-height: 1.12; letter-spacing: -0.02em; margin: 0 0 16px; }
-    .lede { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 40em; margin: 0; }
-    .lede strong { color: var(--text); font-weight: 600; }
+    /* ---- the mark ---- */
+    .mark { display: block; width: 100%; height: auto; }
+    .mark .ring { fill: none; stroke: currentColor; stroke-width: 5.5; stroke-linecap: round; }
+    .mark .led { fill: var(--led-fill); }
+    @keyframes advertise {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.55; }
+    }
+    .hero .mark .led { animation: advertise 2.6s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { .hero .mark .led { animation: none; } }
 
-    section { padding-block: 32px; border-top: 1px solid var(--border); }
-    h2 { font-size: 22px; letter-spacing: -0.01em; margin: 0 0 6px; }
-    .sub { color: var(--muted); margin: 0 0 20px; }
+    /* ---- hero ---- */
+    .hero {
+      padding-block: clamp(40px, 7vw, 88px) clamp(40px, 6vw, 72px);
+      display: grid;
+      gap: 40px 56px;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: end;
+    }
+    @media (min-width: 900px) {
+      .hero { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .hero .brand { grid-column: 1 / -1; align-self: start; margin-bottom: clamp(8px, 2vw, 24px); }
+    .brand .mark { width: 48px; }
+    .wordmark {
+      font-weight: 800;
+      font-stretch: 112%;
+      font-size: 1.625rem;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .wordmark .ble { color: var(--led); }
+    .hero h1 {
+      font-weight: 700;
+      font-stretch: 108%;
+      font-size: clamp(2.4rem, 1.1rem + 4.4vw, 4.25rem);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      max-width: 12ch;
+      margin-bottom: clamp(20px, 3vw, 28px);
+    }
+    .lede {
+      font-size: clamp(1.0625rem, 0.95rem + 0.6vw, 1.3125rem);
+      line-height: 1.5;
+      color: var(--ink-2);
+      max-width: 36em;
+      text-wrap: pretty;
+    }
+    .lede strong { color: var(--ink); font-weight: 600; }
 
-    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    /* datasheet-style key facts */
+    .spec {
+      margin: 0;
+      border-top: 2px solid var(--ink);
+      font-size: 0.9375rem;
+    }
+    .spec > div {
+      display: grid;
+      grid-template-columns: 7.5em 1fr;
+      gap: 12px;
+      padding-block: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .spec dt {
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.2em;
+    }
+    .spec dd { margin: 0; color: var(--ink); }
+
+    /* ---- datasheet rows: rail left, content right ---- */
+    .row {
+      border-top: 1px solid var(--line-strong);
+      padding-block: clamp(36px, 5vw, 64px);
+      display: grid;
+      gap: 24px 56px;
+      grid-template-columns: minmax(0, 1fr);
+    }
+    @media (min-width: 860px) {
+      .row { grid-template-columns: 232px minmax(0, 1fr); }
+    }
+    .rail h2 {
+      font-weight: 700;
+      font-stretch: 108%;
+      font-size: 1.625rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .rail .sub { color: var(--muted); font-size: 0.9375rem; line-height: 1.5; text-wrap: pretty; }
+
+    /* ---- device cards ---- */
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    }
     .card {
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 18px 18px 16px;
-      display: flex; flex-direction: column; gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 20px 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.15s ease;
     }
-    .card .device { color: var(--muted); font-size: 13px; letter-spacing: .02em; text-transform: uppercase; }
-    .card h3 { margin: 0; font-size: 19px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-    .card p { margin: 0; color: var(--muted); font-size: 15px; flex: 1; }
-    .card .links { display: flex; gap: 14px; flex-wrap: wrap; font-size: 15px; margin-top: 4px; }
-    .card .links .primary {
-      background: var(--accent); color: var(--accent-ink);
-      padding: 6px 12px; border-radius: 999px; text-decoration: none; font-weight: 600;
+    .card:hover { border-color: var(--line-strong); }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
     }
-    .card .links .primary:hover { filter: brightness(1.08); }
+    .device {
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      line-height: 1.4;
+      min-width: 0;
+      flex: 1 1 12em;
+    }
+    .card h3 {
+      font-weight: 700;
+      font-stretch: 106%;
+      font-size: 1.5rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .card p.what { color: var(--ink-2); font-size: 0.9375rem; line-height: 1.5; flex: 1; text-wrap: pretty; }
+    .air {
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+    .air b { font-weight: 500; color: var(--ink-2); letter-spacing: 0.06em; text-transform: uppercase; margin-right: 0.6em; }
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 6px 16px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      font-size: 0.9375rem;
+    }
+    .links .primary {
+      background: var(--led-fill);
+      color: var(--on-led);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+    .links .primary:hover { filter: brightness(1.06); }
+    .links .primary::after { content: " \2192"; }
+    .links a:not(.primary) { color: var(--ink); white-space: nowrap; }
+    .links a:not(.primary)::after { content: "\2197"; font-size: 0.85em; margin-left: 0.15em; color: var(--muted); }
 
-    .also { margin: 18px 0 0; color: var(--muted); font-size: 15px; }
-    .also strong { color: var(--text); font-weight: 600; }
-
+    /* ---- status badges: an LED per state ---- */
     .badge {
-      font-size: 12px; font-weight: 600; letter-spacing: .02em;
-      padding: 2px 9px; border-radius: 999px; white-space: nowrap;
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+      line-height: 1;
     }
-    .badge.live { background: var(--live-bg); color: var(--live-fg); }
-    .badge.soon { background: var(--soon-bg); color: var(--soon-fg); }
-    .badge.wip  { background: var(--wip-bg);  color: var(--wip-fg); }
-    .badge.plan { background: var(--plan-bg); color: var(--plan-fg); }
+    .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; flex: none; box-sizing: border-box; }
+    .badge.live::before { background: var(--led-fill); box-shadow: 0 0 0 3px var(--led-soft); }
+    .badge.soon::before { background: var(--ink); }
+    .badge.wip::before  { border: 2px solid var(--ink); }
+    .badge.plan         { color: var(--muted); }
+    .badge.plan::before { border: 2px solid var(--line-strong); }
 
-    .how { display: grid; gap: 18px 28px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-    .how h3 { margin: 0 0 4px; font-size: 16px; }
-    .how p { margin: 0; color: var(--muted); font-size: 15px; }
+    .also { margin-top: 24px; color: var(--muted); font-size: 0.9375rem; text-wrap: pretty; }
+    .also strong { color: var(--ink); font-weight: 600; }
 
-    .req { display: flex; gap: 10px; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
-    .req li { border: 1px solid var(--border); background: var(--surface); border-radius: 10px; padding: 8px 12px; font-size: 15px; }
-    .req li.no { color: var(--muted); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--muted) 60%, transparent); }
-    .req li.no::before { content: "✕ "; text-decoration: none; display: inline-block; }
-    .req li.yes::before { content: "✓ "; color: var(--accent); font-weight: 700; }
-    .note { color: var(--muted); font-size: 15px; margin: 14px 0 0; }
+    /* ---- how it works ---- */
+    .rules {
+      display: grid;
+      gap: 24px 28px;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    }
+    .rules > div { border-top: 2px solid var(--ink); padding-top: 14px; }
+    .rules h3 { font-weight: 700; font-stretch: 106%; font-size: 1.125rem; letter-spacing: -0.01em; margin-bottom: 8px; }
+    .rules p { color: var(--ink-2); font-size: 0.9375rem; line-height: 1.5; text-wrap: pretty; }
 
-    ol.steps { margin: 0; padding-left: 1.3em; color: var(--muted); }
-    ol.steps li { margin-bottom: 8px; }
-    ol.steps li strong { color: var(--text); font-weight: 600; }
-    code { font: 14px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 1px 5px; }
+    /* ---- what you need ---- */
+    .req { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); max-width: 36em; }
+    .req li {
+      display: grid;
+      grid-template-columns: 1.6em 1fr;
+      gap: 10px;
+      align-items: baseline;
+      padding-block: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .req li::before {
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-weight: 500;
+      text-align: center;
+    }
+    .req li.yes::before { content: "\2713"; color: var(--led); }
+    .req li.no::before  { content: "\2715"; color: var(--muted); }
+    .req li.no { color: var(--muted); }
+    .req li small { display: block; font-size: 0.875rem; color: var(--muted); }
+    .note { color: var(--muted); font-size: 0.9375rem; margin-top: 16px; max-width: 36em; text-wrap: pretty; }
 
-    footer { padding-block: 32px 48px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
-    footer p { margin: 0 0 8px; }
+    /* ---- liberate a device ---- */
+    .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; max-width: 40em; }
+    .steps li {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 2.2em 1fr;
+      gap: 12px;
+      padding-block: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-2);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+    .steps li:first-child { border-top: 2px solid var(--ink); }
+    .steps li::before {
+      content: counter(step);
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-weight: 500;
+      font-size: 1.25rem;
+      color: var(--led);
+      line-height: 1.15;
+    }
+    .steps li strong { display: block; color: var(--ink); font-weight: 700; font-stretch: 106%; font-size: 1.0625rem; margin-bottom: 2px; }
+    code {
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.85em;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0.05em 0.35em;
+      color: var(--ink);
+    }
+
+    /* ---- footer ---- */
+    footer {
+      border-top: 1px solid var(--line-strong);
+      padding-block: 36px 56px;
+      color: var(--muted);
+      font-size: 0.875rem;
+      line-height: 1.55;
+      display: grid;
+      gap: 20px 56px;
+      grid-template-columns: minmax(0, 1fr);
+    }
+    @media (min-width: 860px) { footer { grid-template-columns: 232px minmax(0, 1fr); } }
+    footer .brand { margin: 0; align-items: center; }
+    footer .brand .mark { width: 28px; }
+    footer .wordmark { font-size: 1.125rem; }
+    footer .legal { display: grid; gap: 10px; max-width: 60em; }
+    footer .legal p { text-wrap: pretty; }
+    footer a { color: var(--ink); }
+    footer .meta { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px 20px; }
+    footer .meta a { color: var(--ink); }
   </style>
 </head>
 <body>
 <main>
 
   <header class="hero">
-    <div class="brand" aria-hidden="true">
-      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
-        <!-- three radio arcs with an open, unlatched gap: a signal that isn't locked -->
-        <path d="M24 44 a12 12 0 0 1 0-24" style="color: var(--accent)"/>
-        <path d="M16 52 a24 24 0 0 1 0-40" style="color: var(--accent)" opacity=".7"/>
-        <path d="M8 60 a36 36 0 0 1 0-56" style="color: var(--accent)" opacity=".4"/>
-        <path d="M34 32 h22 M48 24 l8 8 -8 8"/>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 64 64" width="48" height="48" role="img" aria-label="libreble mark: a beacon inside two rings that open toward the top right">
+        <g transform="rotate(-45 32 32)">
+          <path class="ring" d="M44.36 40.50A15 15 0 1 1 44.36 23.50"/>
+          <path class="ring" d="M54.69 42.50A25 25 0 1 1 54.69 21.50"/>
+          <circle class="led" cx="32" cy="32" r="6.5"/>
+        </g>
       </svg>
-      <span class="word">libre<b>ble</b></span>
+      <span class="wordmark">libre<span class="ble">ble</span></span>
     </div>
-    <h1>Your devices, without their vendors.</h1>
-    <p class="lede">
-      Bluetooth gadgets ship with an app that wants an account, a cloud, and your data.
-      libreble is a collection of web apps that talk to those devices <strong>directly, in your
-      browser</strong> — no account, no app store, no server. Each one also
-      <strong>documents the device's protocol</strong> so anyone can build on it.
-    </p>
+    <div>
+      <h1>Your devices, without their vendors.</h1>
+      <p class="lede">
+        Bluetooth gadgets ship with an app that wants an account, a cloud, and your data.
+        libreble is a collection of web apps that talk to those devices
+        <strong>directly, in your browser</strong> — no account, no app store, no server.
+        Each one also <strong>documents the device's protocol</strong> so anyone can build on it.
+      </p>
+    </div>
+
+    <dl class="spec" aria-label="libreble at a glance">
+      <div><dt>Transport</dt><dd>Web Bluetooth, browser to device</dd></div>
+      <div><dt>Account</dt><dd>None</dd></div>
+      <div><dt>Cloud</dt><dd>None — data stays in your browser</dd></div>
+      <div><dt>Vendor code</dt><dd>None — the on-air protocol only</dd></div>
+      <div><dt>Runs in</dt><dd>Chrome on Android, Chrome or Edge on desktop</dd></div>
+      <div><dt>License</dt><dd>MIT, every repo</dd></div>
+    </dl>
   </header>
 
-  <section id="devices">
-    <h2>Liberated devices</h2>
-    <p class="sub">Every app runs on its own page under this site and is a standalone repo on GitHub.</p>
-    <div class="grid">
-
-      <!--
-        To add a device, copy one card. Badges: live · soon · wip · plan.
-        Links: the app page (primary), its PROTOCOL.md, and the repo.
-      -->
-
-      <article class="card">
-        <div class="device">ICG IC-6 indoor bike</div>
-        <h3>Bikefit <span class="badge live">Live</span></h3>
-        <p>Live power, cadence, heart rate and zones; full session history on your device;
-          TCX export to Strava, intervals.icu and friends. Talks the bike's own protocol over
-          Nordic UART.</p>
-        <div class="links">
-          <a class="primary" href="https://libreble.github.io/bikefit/">Open app</a>
-          <a href="https://github.com/libreble/bikefit/blob/main/PROTOCOL.md">Protocol</a>
-          <a href="https://github.com/libreble/bikefit">Source</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="device">Oral-B iO toothbrush</div>
-        <h3>Brushlog <span class="badge live">Live</span></h3>
-        <p>Syncs the brushing history the brush already stores — no pairing, no P&amp;G
-          account. Live pressure and timer, brush-head wear, streaks and trends. Verified on
-          an iO; Genius and Smart lines covered too.</p>
-        <div class="links">
-          <a class="primary" href="https://libreble.github.io/brushlog/">Open app</a>
-          <a href="https://github.com/libreble/brushlog/blob/main/docs/PROTOCOL.md">Protocol</a>
-          <a href="https://github.com/libreble/brushlog">Source</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="device">Dremel 8260 rotary tool</div>
-        <h3>COLLET <span class="badge live">Live</span></h3>
-        <p>Live battery, speed and health from the tool, speed control with the tool's own
-          confirm handshake, and an accessory &amp; material speed guide — which bit at which
-          speed. A built-in mock tool runs the whole app without hardware.</p>
-        <div class="links">
-          <a class="primary" href="https://libreble.github.io/collet/">Open app</a>
-          <a href="https://github.com/libreble/collet/blob/main/docs/PROTOCOL.md">Protocol</a>
-          <a href="https://github.com/libreble/collet">Source</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="device">Bluetooth multimeters — UNI-T, OWON, Aneng, BSIDE/ZOYI, Voltcraft, AICARE</div>
-        <h3>Multimeter <span class="badge live">Live</span></h3>
-        <p>Live full-screen readout, charting, statistics, recording and CSV/PNG export — several
-          meters at once, with derived channels. One app across six vendors, each meter family's
-          protocol documented.</p>
-        <div class="links">
-          <a class="primary" href="https://libreble.github.io/multimeter/">Open app</a>
-          <a href="https://github.com/libreble/multimeter/tree/main/docs/protocols">Protocols</a>
-          <a href="https://github.com/libreble/multimeter">Source</a>
-        </div>
-      </article>
-
+  <section id="devices" class="row">
+    <div class="rail">
+      <h2>Liberated devices</h2>
+      <p class="sub">Every app runs on its own page under this site and is a standalone repo on GitHub.</p>
     </div>
-    <p class="also">Looking for liberated <strong>label printers</strong>? That's a sibling
-      project: <a href="https://thermal-label.github.io/">thermal-label.github.io</a> — same idea,
-      over USB instead of Bluetooth.</p>
+    <div>
+      <div class="grid">
+
+        <!--
+          To add a device, copy one <article class="card"> block.
+            .device   what it liberates (device line)
+            .badge    status: live · soon · wip · plan  (class on the span, text to match)
+            h3        the app name
+            .what     one or two sentences on what it does
+            .air      the on-air fingerprint: transport / GATT service / manufacturer id
+            .links    Open app (class="primary"), Protocol doc, Source repo
+        -->
+
+        <article class="card">
+          <div class="card-top">
+            <span class="device">ICG IC-6 indoor bike</span>
+            <span class="badge live">Live</span>
+          </div>
+          <h3>Bikefit</h3>
+          <p class="what">Live power, cadence, heart rate and zones; full session history on your
+            device; TCX export to Strava, intervals.icu and friends.</p>
+          <p class="air"><b>On air</b>Nordic UART Service · framed ICG messages</p>
+          <div class="links">
+            <a class="primary" href="https://libreble.github.io/bikefit/">Open app<span class="sr">: Bikefit</span></a>
+            <a href="https://github.com/libreble/bikefit/blob/main/PROTOCOL.md">Protocol</a>
+            <a href="https://github.com/libreble/bikefit">Source</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="device">Oral-B iO toothbrush</span>
+            <span class="badge live">Live</span>
+          </div>
+          <h3>Brushlog</h3>
+          <p class="what">Syncs the brushing history the brush already stores — no pairing, no P&amp;G
+            account. Live pressure and timer, brush-head wear, streaks and trends. Verified on an
+            iO; Genius and Smart lines covered too.</p>
+          <p class="air"><b>On air</b>GATT a0f0ff·· family · adv. company 0x00DC</p>
+          <div class="links">
+            <a class="primary" href="https://libreble.github.io/brushlog/">Open app<span class="sr">: Brushlog</span></a>
+            <a href="https://github.com/libreble/brushlog/blob/main/docs/PROTOCOL.md">Protocol</a>
+            <a href="https://github.com/libreble/brushlog">Source</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="device">Dremel 8260 rotary tool</span>
+            <span class="badge live">Live</span>
+          </div>
+          <h3>COLLET</h3>
+          <p class="what">Live battery, speed and health from the tool, speed control with the tool's
+            own confirm handshake, and an accessory &amp; material speed guide — which bit at which
+            speed. A built-in mock tool runs the whole app without hardware.</p>
+          <p class="air"><b>On air</b>GATT 0xFDE8 (Bosch) · manufacturer 0x02A6</p>
+          <div class="links">
+            <a class="primary" href="https://libreble.github.io/collet/">Open app<span class="sr">: COLLET</span></a>
+            <a href="https://github.com/libreble/collet/blob/main/docs/PROTOCOL.md">Protocol</a>
+            <a href="https://github.com/libreble/collet">Source</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <span class="device">Bluetooth multimeters — UNI-T, OWON, Aneng, BSIDE/ZOYI, Voltcraft, AICARE</span>
+            <span class="badge live">Live</span>
+          </div>
+          <h3>Multimeter</h3>
+          <p class="what">Live full-screen readout, charting, statistics, recording and CSV/PNG
+            export — several meters at once, with derived channels. One app across six vendors,
+            each meter family's protocol documented.</p>
+          <p class="air"><b>On air</b>GATT 0xFFF0 / 0xFFB0 · one doc per meter family</p>
+          <div class="links">
+            <a class="primary" href="https://libreble.github.io/multimeter/">Open app<span class="sr">: Multimeter</span></a>
+            <a href="https://github.com/libreble/multimeter/tree/main/docs/protocols">Protocols</a>
+            <a href="https://github.com/libreble/multimeter">Source</a>
+          </div>
+        </article>
+
+      </div>
+      <p class="also">Looking for liberated <strong>label printers</strong>? That's a sibling
+        project: <a href="https://thermal-label.github.io/">thermal-label.github.io</a> — same idea,
+        over USB instead of Bluetooth.</p>
+    </div>
   </section>
 
-  <section id="how">
-    <h2>How it works</h2>
-    <p class="sub">Three rules every libreble app follows.</p>
-    <div class="how">
+  <section id="how" class="row">
+    <div class="rail">
+      <h2>How it works</h2>
+      <p class="sub">Three rules every libreble app follows.</p>
+    </div>
+    <div class="rules">
       <div>
         <h3>Direct to the device</h3>
         <p>The browser speaks Bluetooth to the device itself through
@@ -234,45 +619,71 @@
     </div>
   </section>
 
-  <section id="requirements">
-    <h2>What you need</h2>
-    <p class="sub">Web Bluetooth is a Chromium feature, so the browser matters more than the device.</p>
-    <ul class="req">
-      <li class="yes">Chrome on Android</li>
-      <li class="yes">Chrome or Edge on desktop</li>
-      <li class="no">Safari (incl. every browser on iOS)</li>
-      <li class="no">Firefox</li>
-    </ul>
-    <p class="note">On iPhone and iPad a Web Bluetooth-capable browser such as Bluefy can work,
-      but it isn't a supported target.</p>
+  <section id="requirements" class="row">
+    <div class="rail">
+      <h2>What you need</h2>
+      <p class="sub">Web Bluetooth is a Chromium feature, so the browser matters more than the device.</p>
+    </div>
+    <div>
+      <ul class="req">
+        <li class="yes"><span><span class="sr">Supported: </span>Chrome on Android</span></li>
+        <li class="yes"><span><span class="sr">Supported: </span>Chrome or Edge on desktop <small>Windows, macOS, Linux, ChromeOS</small></span></li>
+        <li class="no"><span><span class="sr">Not supported: </span>Safari <small>including every browser on iOS and iPadOS</small></span></li>
+        <li class="no"><span><span class="sr">Not supported: </span>Firefox</span></li>
+      </ul>
+      <p class="note">On iPhone and iPad a Web Bluetooth-capable browser such as Bluefy can work,
+        but it isn't a supported target.</p>
+    </div>
   </section>
 
-  <section id="contribute">
-    <h2>Liberate a device</h2>
-    <p class="sub">Have a gadget held hostage by its app? Each device is its own repo with the same shape.</p>
-    <ol class="steps">
-      <li><strong>Reverse-engineer the protocol</strong> from the official app or captured traffic,
-        and write it up as a <code>PROTOCOL.md</code> other people can implement from. The write-up
-        counts as much as the app.</li>
-      <li><strong>Build the PWA</strong>: a pure protocol layer with no UI dependencies, a real
-        Web Bluetooth transport plus a mock so the UI works without hardware, local storage with
-        JSON export, a manifest and a service worker.</li>
-      <li><strong>Deploy to GitHub Pages</strong> under <code>libreble.github.io/&lt;repo&gt;/</code>
-        and add a card above.</li>
-    </ol>
-    <p class="note"><a href="https://github.com/libreble/bikefit">Bikefit</a> is the reference
-      layout to copy. Everything lives at
-      <a href="https://github.com/libreble">github.com/libreble</a>.</p>
+  <section id="contribute" class="row">
+    <div class="rail">
+      <h2>Liberate a device</h2>
+      <p class="sub">Have a gadget held hostage by its app? Each device is its own repo with the same shape.</p>
+    </div>
+    <div>
+      <ol class="steps">
+        <li><span><strong>Reverse-engineer the protocol</strong> Read it out of the official app or
+          captured traffic, and write it up as a <code>PROTOCOL.md</code> other people can implement
+          from. The write-up counts as much as the app.</span></li>
+        <li><span><strong>Build the PWA</strong> A pure protocol layer with no UI dependencies, a
+          real Web Bluetooth transport plus a mock so the UI works without hardware, local storage
+          with JSON export, a manifest and a service worker.</span></li>
+        <li><span><strong>Deploy to GitHub Pages</strong> Under
+          <code>libreble.github.io/&lt;repo&gt;/</code>, then add a card above.</span></li>
+      </ol>
+      <p class="note"><a href="https://github.com/libreble/bikefit">Bikefit</a> is the reference
+        layout to copy. Everything lives at
+        <a href="https://github.com/libreble">github.com/libreble</a>.</p>
+    </div>
   </section>
 
   <footer>
-    <p>libreble is an independent, unofficial project. It is not affiliated with or endorsed by
-      any device maker; product names belong to their respective owners.</p>
-    <p>The apps reproduce only the on-air Bluetooth protocols, derived from public
-      reverse-engineering for interoperability and personal-data ownership. No vendor code is
-      included.</p>
-    <p>All code is released under the
-      <a href="https://github.com/libreble/libreble.github.io/blob/main/LICENSE">MIT License</a>.</p>
+    <div>
+      <div class="brand">
+        <svg class="mark" viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+          <g transform="rotate(-45 32 32)">
+            <path class="ring" d="M44.36 40.50A15 15 0 1 1 44.36 23.50"/>
+            <path class="ring" d="M54.69 42.50A25 25 0 1 1 54.69 21.50"/>
+            <circle class="led" cx="32" cy="32" r="6.5"/>
+          </g>
+        </svg>
+        <span class="wordmark">libre<span class="ble">ble</span></span>
+      </div>
+      <p class="meta">
+        <a href="https://github.com/libreble">GitHub</a>
+        <a href="https://thermal-label.github.io/">thermal-label</a>
+      </p>
+    </div>
+    <div class="legal">
+      <p>libreble is an independent, unofficial project. It is not affiliated with or endorsed by
+        any device maker; product names belong to their respective owners.</p>
+      <p>The apps reproduce only the on-air Bluetooth protocols, derived from public
+        reverse-engineering for interoperability and personal-data ownership. No vendor code is
+        included.</p>
+      <p>All code is released under the
+        <a href="https://github.com/libreble/libreble.github.io/blob/main/LICENSE">MIT License</a>.</p>
+    </div>
   </footer>
 
 </main>
