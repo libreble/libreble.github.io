@@ -268,7 +268,8 @@
       color: var(--muted);
       padding-top: 8px;
     }
-    .vs thead th.us { color: var(--led); }
+    .vs thead th.us { text-transform: none; letter-spacing: 0; padding-top: 4px; }
+    .vs thead th.us .wordmark { font-family: Archivo, "Helvetica Neue", Arial, sans-serif; font-size: 1.125rem; color: var(--ink); }
     .vs tbody th { font-weight: 500; color: var(--ink); width: 30%; }
     .vs td { color: var(--muted); }
     .vs td.us { color: var(--ink); }
@@ -501,7 +502,7 @@
 
     <table class="vs" aria-label="libreble compared with the vendor app">
       <thead>
-        <tr><th scope="col"><span class="sr">Feature</span></th><th scope="col" class="us">libreble</th><th scope="col">Vendor app</th></tr>
+        <tr><th scope="col"><span class="sr">Feature</span></th><th scope="col" class="us"><span class="wordmark">libre<span class="ble">ble</span></span></th><th scope="col">Vendor app</th></tr>
       </thead>
       <tbody>
         <tr><th scope="row">Account</th><td class="us"><span class="ok">✓</span>None</td><td><span class="no">✕</span>Sign up first</td></tr>
