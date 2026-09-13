@@ -138,6 +138,7 @@
       --led-fill: #f26b1d;     /* accent for fills: the LED itself */
       --on-led: #180d04;
       --led-soft: rgba(242, 107, 29, 0.13);
+      --ok: #15803d;           /* the green checkmark */
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
@@ -152,6 +153,7 @@
         --led-fill: #ff8a3d;
         --on-led: #180d04;
         --led-soft: rgba(255, 138, 61, 0.16);
+        --ok: #4ade80;
       }
     }
     :root[data-theme="dark"] {
@@ -166,6 +168,7 @@
       --led-fill: #ff8a3d;
       --on-led: #180d04;
       --led-soft: rgba(255, 138, 61, 0.16);
+      --ok: #4ade80;
     }
 
     /* ---- base ---- */
@@ -242,29 +245,41 @@
     }
     .lede strong { color: var(--ink); font-weight: 600; }
 
-    /* datasheet-style key facts */
-    .spec {
-      margin: 0;
+    /* libreble vs the vendor app, at a glance */
+    .vs {
+      width: 100%;
+      border-collapse: collapse;
       border-top: 2px solid var(--ink);
       font-size: 0.9375rem;
     }
-    .spec > div {
-      display: grid;
-      grid-template-columns: 7.5em 1fr;
-      gap: 12px;
-      padding-block: 10px;
+    .vs th, .vs td {
+      padding: 10px 8px;
       border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
     }
-    .spec dt {
+    .vs th:first-child, .vs td:first-child { padding-left: 0; }
+    .vs thead th {
       font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 0.75rem;
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
-      padding-top: 0.2em;
+      padding-top: 8px;
     }
-    .spec dd { margin: 0; color: var(--ink); }
+    .vs thead th.us { color: var(--led); }
+    .vs tbody th { font-weight: 500; color: var(--ink); width: 30%; }
+    .vs td { color: var(--muted); }
+    .vs td.us { color: var(--ink); }
+    .vs .ok, .vs .no {
+      display: inline-block;
+      width: 1.35em;
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-weight: 700;
+    }
+    .vs .ok { color: var(--ok); }
+    .vs .no { color: var(--muted); }
 
     /* ---- datasheet rows: rail left, content right ---- */
     .row {
@@ -327,14 +342,6 @@
       letter-spacing: -0.02em;
     }
     .card p.what { color: var(--ink-2); font-size: 0.9375rem; line-height: 1.5; flex: 1; text-wrap: pretty; }
-    .air {
-      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.75rem;
-      line-height: 1.5;
-      color: var(--muted);
-      overflow-wrap: anywhere;
-    }
-    .air b { font-weight: 500; color: var(--ink-2); letter-spacing: 0.06em; text-transform: uppercase; margin-right: 0.6em; }
     .links {
       display: flex;
       align-items: center;
@@ -492,14 +499,19 @@
       </p>
     </div>
 
-    <dl class="spec" aria-label="libreble at a glance">
-      <div><dt>Transport</dt><dd>Web Bluetooth, browser to device</dd></div>
-      <div><dt>Account</dt><dd>None</dd></div>
-      <div><dt>Cloud</dt><dd>None — data stays in your browser</dd></div>
-      <div><dt>Vendor code</dt><dd>None — the on-air protocol only</dd></div>
-      <div><dt>Runs in</dt><dd>Chrome on Android, Chrome or Edge on desktop</dd></div>
-      <div><dt>License</dt><dd>MIT, every repo</dd></div>
-    </dl>
+    <table class="vs" aria-label="libreble compared with the vendor app">
+      <thead>
+        <tr><th scope="col"><span class="sr">Feature</span></th><th scope="col" class="us">libreble</th><th scope="col">Vendor app</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Account</th><td class="us"><span class="ok">✓</span>None</td><td><span class="no">✕</span>Sign up first</td></tr>
+        <tr><th scope="row">Your data</th><td class="us"><span class="ok">✓</span>On your device</td><td><span class="no">✕</span>Their cloud</td></tr>
+        <tr><th scope="row">Install</th><td class="us"><span class="ok">✓</span>Open a link</td><td><span class="no">✕</span>App store</td></tr>
+        <tr><th scope="row">Offline</th><td class="us"><span class="ok">✓</span>Works</td><td><span class="no">✕</span>Usually not</td></tr>
+        <tr><th scope="row">Protocol</th><td class="us"><span class="ok">✓</span>Documented</td><td><span class="no">✕</span>Secret</td></tr>
+        <tr><th scope="row">Source</th><td class="us"><span class="ok">✓</span>Open, MIT</td><td><span class="no">✕</span>Closed</td></tr>
+      </tbody>
+    </table>
   </header>
 
   <section id="devices" class="row">
@@ -513,22 +525,20 @@
         <!--
           To add a device, copy one <article class="card"> block.
             .device   what it liberates (device line)
-            .badge    status: live · soon · wip · plan  (class on the span, text to match)
+            .badge    optional <span class="badge soon|wip|plan"> in .card-top for an app that
+                      isn't live yet; live apps carry no badge
             h3        the app name
             .what     one or two sentences on what it does
-            .air      the on-air fingerprint: transport / GATT service / manufacturer id
             .links    Open app (class="primary"), Protocol doc, Source repo
         -->
 
         <article class="card">
           <div class="card-top">
             <span class="device">ICG IC-6 indoor bike</span>
-            <span class="badge live">Live</span>
           </div>
           <h3>Bikefit</h3>
           <p class="what">Live power, cadence, heart rate and zones; full session history on your
             device; TCX export to Strava, intervals.icu and friends.</p>
-          <p class="air"><b>On air</b>Nordic UART Service · framed ICG messages</p>
           <div class="links">
             <a class="primary" href="https://libreble.github.io/bikefit/">Open app<span class="sr">: Bikefit</span></a>
             <a href="https://github.com/libreble/bikefit/blob/main/PROTOCOL.md">Protocol</a>
@@ -539,13 +549,11 @@
         <article class="card">
           <div class="card-top">
             <span class="device">Oral-B iO toothbrush</span>
-            <span class="badge live">Live</span>
           </div>
           <h3>Brushlog</h3>
           <p class="what">Syncs the brushing history the brush already stores — no pairing, no P&amp;G
             account. Live pressure and timer, brush-head wear, streaks and trends. Verified on an
             iO; Genius and Smart lines covered too.</p>
-          <p class="air"><b>On air</b>GATT a0f0ff·· family · adv. company 0x00DC</p>
           <div class="links">
             <a class="primary" href="https://libreble.github.io/brushlog/">Open app<span class="sr">: Brushlog</span></a>
             <a href="https://github.com/libreble/brushlog/blob/main/docs/PROTOCOL.md">Protocol</a>
@@ -556,13 +564,11 @@
         <article class="card">
           <div class="card-top">
             <span class="device">Dremel 8260 rotary tool</span>
-            <span class="badge live">Live</span>
           </div>
           <h3>COLLET</h3>
           <p class="what">Live battery, speed and health from the tool, speed control with the tool's
             own confirm handshake, and an accessory &amp; material speed guide — which bit at which
             speed. A built-in mock tool runs the whole app without hardware.</p>
-          <p class="air"><b>On air</b>GATT 0xFDE8 (Bosch) · manufacturer 0x02A6</p>
           <div class="links">
             <a class="primary" href="https://libreble.github.io/collet/">Open app<span class="sr">: COLLET</span></a>
             <a href="https://github.com/libreble/collet/blob/main/docs/PROTOCOL.md">Protocol</a>
@@ -573,13 +579,11 @@
         <article class="card">
           <div class="card-top">
             <span class="device">Bluetooth multimeters — UNI-T, OWON, Aneng, BSIDE/ZOYI, Voltcraft, AICARE</span>
-            <span class="badge live">Live</span>
           </div>
           <h3>Multimeter</h3>
           <p class="what">Live full-screen readout, charting, statistics, recording and CSV/PNG
             export — several meters at once, with derived channels. One app across six vendors,
             each meter family's protocol documented.</p>
-          <p class="air"><b>On air</b>GATT 0xFFF0 / 0xFFB0 · one doc per meter family</p>
           <div class="links">
             <a class="primary" href="https://libreble.github.io/multimeter/">Open app<span class="sr">: Multimeter</span></a>
             <a href="https://github.com/libreble/multimeter/tree/main/docs/protocols">Protocols</a>
