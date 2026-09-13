@@ -6,6 +6,12 @@ The index site for [libreble](https://github.com/libreble) — served at
 Each device app is its own repo and deploys to its own GitHub Pages folder
 (`https://libreble.github.io/<repo>/`), so they naturally hang under this page.
 
+| app | device | repo |
+|---|---|---|
+| [Bikefit](https://libreble.github.io/bikefit/) | ICG IC-6 indoor bike | [libreble/bikefit](https://github.com/libreble/bikefit) |
+| [Brushlog](https://libreble.github.io/brushlog/) | Oral-B toothbrush | [libreble/brushlog](https://github.com/libreble/brushlog) |
+| [COLLET](https://libreble.github.io/collet/) | Dremel 8260 rotary tool | [libreble/collet](https://github.com/libreble/collet) |
+
 ## Editing
 
 Plain static HTML, no build step. GitHub Pages serves `main` from the repo root.
