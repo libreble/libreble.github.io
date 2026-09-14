@@ -1,5 +1,5 @@
 name: Request a device
-description: A Bluetooth device you'd like to see liberated.
+description: A Bluetooth LE device you'd like to see liberated.
 title: "[device] "
 labels: ["device request"]
 body:

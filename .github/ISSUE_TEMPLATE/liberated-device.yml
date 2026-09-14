@@ -1,5 +1,5 @@
 name: I liberated a device
-description: You built an app that frees a Bluetooth device from its vendor. Get it listed on libreble.github.io.
+description: You built an app that frees a Bluetooth LE device from its vendor. Get it listed on libreble.github.io.
 title: "[liberated] "
 labels: ["liberated device"]
 body:

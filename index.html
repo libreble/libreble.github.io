@@ -226,7 +226,8 @@
       letter-spacing: -0.02em;
       line-height: 1;
     }
-    .wordmark .ble { color: var(--led); }
+    .ble { color: var(--led); }
+    .rail .sub strong { color: var(--ink); font-weight: 700; }
     .hero h1 {
       font-weight: 700;
       font-stretch: 108%;
@@ -650,8 +651,9 @@
   <section id="contribute" class="row">
     <div class="rail">
       <h2>Liberate a device</h2>
-      <p class="sub">Have a gadget held hostage by its app? Anyone can liberate one — this is the
-        shape, and how to get it listed here.</p>
+      <p class="sub">Have a gadget held hostage by its app? If it talks Bluetooth Low Energy — the
+        <span class="ble">ble</span> in <strong>libre<span class="ble">ble</span></strong> — anyone
+        can liberate it. This is the shape, and how to get it listed here.</p>
     </div>
     <div>
       <ol class="steps">
@@ -671,9 +673,9 @@
 
       <div class="ask">
         <h3>Not a builder? Ask for a device.</h3>
-        <p>Say which make and model, and what its app holds hostage. Requests are a wish list,
-          not a queue — but if you own the device and can help capture what it says on the air,
-          things move a lot faster.</p>
+        <p>Anything with a Bluetooth LE radio qualifies: say which make and model, and what its
+          app holds hostage. Requests are a wish list, not a queue — but if you own the device and
+          can help capture what it says on the air, things move a lot faster.</p>
         <p class="links">
           <a class="primary" href="https://github.com/libreble/libreble.github.io/issues/new?template=device-request.yml">Request a device</a>
           <a href="https://github.com/libreble/libreble.github.io/labels/device%20request">Open requests</a>
