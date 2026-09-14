@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Regenerate the 1200x630 social cards from og/card.html with headless Chrome.
-# Needs network access for the webfonts (Archivo, IBM Plex Mono via Google Fonts) and ImageMagick.
+# Fonts are self-hosted in ../fonts, so this runs offline; needs Chrome and ImageMagick.
 set -euo pipefail
 cd "$(dirname "$0")"
 HERE="$(pwd)"

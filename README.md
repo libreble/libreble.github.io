@@ -25,10 +25,15 @@ Plain static HTML, no build step. GitHub Pages serves `main` from the repo root.
 - `og/card.html` + `og/render.sh` — the 1200×630 social-card template and the script that
   renders `og/*.png` with headless Chrome. Re-run `og/render.sh` after adding a device.
 - `.nojekyll` — tells Pages not to run Jekyll.
+- `.github/ISSUE_TEMPLATE/` — the *Request a device* and *I liberated a device* forms.
 
 Type: [Archivo](https://fonts.google.com/specimen/Archivo) (variable width/weight) for
 everything, [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) for the on-air
 layer (device lines, badges, identifiers, code). One accent, the LED orange.
+
+- `fonts/` — both faces self-hosted (latin subset, woff2, SIL OFL; licenses alongside), so the
+  page makes **no third-party requests at all**. `index.html` and `og/card.html` declare them
+  with `@font-face`; nothing should ever link to a font CDN.
 
 ### Adding a device
 
