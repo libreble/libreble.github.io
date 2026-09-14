@@ -33,17 +33,20 @@ layer (device lines, badges, identifiers, code). One accent, the LED orange.
 ### Adding a device
 
 Copy one `<article class="card">` block in the *Liberated devices* section (there is a comment
-above the first one). Set the device line, a status badge, the app name, one or two sentences on
-what it does, the on-air line (transport / GATT service / manufacturer id, straight from the
-protocol doc), and the three links (app page as the primary button, `PROTOCOL.md`, repo). Then
-add a `render` line to `og/render.sh`, run it, and add the ItemList entry in the JSON-LD block
-in `<head>`.
+above the first one). Set the device line, the app name, one or two sentences on what it does,
+and the three links (app page as the primary button, `PROTOCOL.md`, repo); a status badge only
+while it isn't live yet. Then add a `render` line to `og/render.sh`, run it, add the ItemList
+entry in the JSON-LD block in `<head>`, and the URL to `sitemap.xml`.
 
-Badges:
+Devices built outside the org arrive through the **I liberated a device** issue form; wishes
+through **Request a device** (`.github/ISSUE_TEMPLATE/`). The page links both under
+*Liberate a device*.
+
+Badges (only shown on cards that aren't live yet):
 
 | class | meaning |
 |---|---|
-| `live` | deployed and usable |
+| `live` | deployed and usable — the default, no badge rendered |
 | `soon` | works on hardware, publishing in progress |
 | `wip`  | in development |
 | `plan` | planned |

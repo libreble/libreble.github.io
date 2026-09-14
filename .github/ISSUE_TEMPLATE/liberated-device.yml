@@ -1,0 +1,60 @@
+name: I liberated a device
+description: You built an app that frees a Bluetooth device from its vendor. Get it listed on libreble.github.io.
+title: "[liberated] "
+labels: ["liberated device"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The list is for apps that follow the three rules — direct to the device over Web Bluetooth,
+        data stays on the user's device, installable PWA — and that ship a protocol write-up other
+        people can implement from. Open source; MIT is what the rest use.
+  - type: input
+    id: device
+    attributes:
+      label: Device
+      description: Make and model, plus any siblings that also work.
+      placeholder: Dremel 8260
+    validations:
+      required: true
+  - type: input
+    id: app
+    attributes:
+      label: App URL
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: repo
+    attributes:
+      label: Source repository
+      placeholder: https://github.com/
+    validations:
+      required: true
+  - type: input
+    id: protocol
+    attributes:
+      label: Protocol write-up
+      description: The document another implementer would start from.
+      placeholder: https://github.com/…/PROTOCOL.md
+    validations:
+      required: true
+  - type: input
+    id: oneliner
+    attributes:
+      label: One line for the card
+      description: What it does, in a sentence.
+      placeholder: Live battery, speed and health, speed control, and a bit-and-material speed guide.
+  - type: textarea
+    id: confirmed
+    attributes:
+      label: What's confirmed on real hardware
+      description: And what isn't yet — the apps here label that honestly.
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: The three rules
+      options:
+        - label: It talks to the device directly over Web Bluetooth — no server in between
+        - label: Data stays on the user's device; no network requests at runtime
+        - label: Only the on-air protocol is reproduced; no vendor code is included

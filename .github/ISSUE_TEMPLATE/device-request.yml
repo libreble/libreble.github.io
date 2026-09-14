@@ -1,0 +1,51 @@
+name: Request a device
+description: A Bluetooth device you'd like to see liberated.
+title: "[device] "
+labels: ["device request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Requests are a wish list, not a queue. What moves one forward is someone who owns the
+        device and can capture what it says on the air — if that's you, say so below.
+  - type: input
+    id: device
+    attributes:
+      label: Device
+      description: Make and model, as printed on the device or its box.
+      placeholder: Oral-B iO Series 9
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Product page
+      placeholder: https://
+  - type: textarea
+    id: hostage
+    attributes:
+      label: What the vendor app holds hostage
+      description: What can you only do through the app? Live data, stored history, settings, control…
+    validations:
+      required: true
+  - type: dropdown
+    id: own
+    attributes:
+      label: Do you own one?
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Can you help?
+      options:
+        - label: I can capture the Bluetooth traffic between the vendor app and the device
+        - label: I can test builds against the real device and paste back diagnostics
+  - type: textarea
+    id: prior
+    attributes:
+      label: Anything already known
+      description: Links to write-ups, other open-source projects, forum threads, GATT dumps.

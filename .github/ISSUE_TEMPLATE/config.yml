@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: A problem with Bikefit
+    url: https://github.com/libreble/bikefit/issues
+    about: Bikefit (ICG IC-6) has its own issue tracker.
+  - name: A problem with Brushlog
+    url: https://github.com/libreble/brushlog/issues
+    about: Brushlog (Oral-B) has its own issue tracker.
+  - name: A problem with COLLET
+    url: https://github.com/libreble/collet/issues
+    about: COLLET (Dremel 8260) has its own issue tracker.
+  - name: A problem with Multimeter
+    url: https://github.com/libreble/multimeter/issues
+    about: Multimeter (UNI-T, OWON, Aneng, BSIDE/ZOYI, Voltcraft, AICARE) has its own issue tracker.
