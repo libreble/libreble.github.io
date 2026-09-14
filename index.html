@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>libreble — your devices, without their vendors</title>
+  <title>libreble — your Bluetooth devices, set free</title>
   <meta name="description" content="Web apps that talk to your Bluetooth devices directly over Web Bluetooth in Chrome — no vendor account, no app, no cloud — with every protocol documented.">
   <link rel="canonical" href="https://libreble.github.io/">
   <meta name="color-scheme" content="light dark">
@@ -14,15 +14,15 @@
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="libreble">
-  <meta property="og:title" content="libreble — your devices, without their vendors">
+  <meta property="og:title" content="libreble — your Bluetooth devices, set free">
   <meta property="og:description" content="Web apps that talk to Bluetooth gadgets directly, in Chrome. No vendor account, no vendor app, no cloud — and every protocol documented.">
   <meta property="og:url" content="https://libreble.github.io/">
   <meta property="og:image" content="https://libreble.github.io/og/libreble.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="The libreble beacon mark next to the words: Your devices, without their vendors.">
+  <meta property="og:image:alt" content="The libreble beacon mark next to the words: Your devices, set free.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="libreble — your devices, without their vendors">
+  <meta name="twitter:title" content="libreble — your Bluetooth devices, set free">
   <meta name="twitter:description" content="Web apps that talk to Bluetooth gadgets directly, in Chrome. No vendor account, no vendor app, no cloud — and every protocol documented.">
   <meta name="twitter:image" content="https://libreble.github.io/og/libreble.png">
 
@@ -443,6 +443,10 @@
       color: var(--led);
       line-height: 1.15;
     }
+    .ask { margin-top: 36px; max-width: 40em; border-top: 2px solid var(--ink); padding-top: 14px; }
+    .ask h3 { font-weight: 700; font-stretch: 106%; font-size: 1.125rem; letter-spacing: -0.01em; margin-bottom: 8px; }
+    .ask p { color: var(--ink-2); font-size: 0.9375rem; line-height: 1.5; text-wrap: pretty; }
+    .ask .links { margin-top: 14px; }
     .steps li strong { display: block; color: var(--ink); font-weight: 700; font-stretch: 106%; font-size: 1.0625rem; margin-bottom: 2px; }
     code {
       font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -491,12 +495,14 @@
       <span class="wordmark">libre<span class="ble">ble</span></span>
     </div>
     <div>
-      <h1>Your devices, without their vendors.</h1>
+      <h1>Your devices, set free.</h1>
       <p class="lede">
-        Bluetooth gadgets ship with an app that wants an account, a cloud, and your data.
-        libreble is a collection of web apps that talk to those devices
-        <strong>directly, in your browser</strong> — no account, no app store, no server.
-        Each one also <strong>documents the device's protocol</strong> so anyone can build on it.
+        Nobody asked for a Bluetooth toothbrush. Most of these gadgets got a radio so an app
+        could sit between you and the thing you bought — and the app is there for the account,
+        your data, and the in-app accessory shop. libreble is a collection of web apps that talk
+        to the devices <strong>directly, in your browser</strong> — no account, no app store,
+        no server. Each one also <strong>documents the device's protocol</strong> so anyone can
+        build on it.
       </p>
     </div>
 
@@ -644,7 +650,8 @@
   <section id="contribute" class="row">
     <div class="rail">
       <h2>Liberate a device</h2>
-      <p class="sub">Have a gadget held hostage by its app? Each device is its own repo with the same shape.</p>
+      <p class="sub">Have a gadget held hostage by its app? Anyone can liberate one — this is the
+        shape, and how to get it listed here.</p>
     </div>
     <div>
       <ol class="steps">
@@ -654,12 +661,24 @@
         <li><span><strong>Build the PWA</strong> A pure protocol layer with no UI dependencies, a
           real Web Bluetooth transport plus a mock so the UI works without hardware, local storage
           with JSON export, a manifest and a service worker.</span></li>
-        <li><span><strong>Deploy to GitHub Pages</strong> Under
-          <code>libreble.github.io/&lt;repo&gt;/</code>, then add a card above.</span></li>
+        <li><span><strong>Publish it, then tell us</strong> Deploy it anywhere — your own GitHub
+          Pages is fine. <a href="https://github.com/libreble/libreble.github.io/issues/new?template=liberated-device.yml">Open an issue</a>
+          with the app, the source and the protocol write-up, and it gets a card above.</span></li>
       </ol>
       <p class="note"><a href="https://github.com/libreble/bikefit">Bikefit</a> is the reference
         layout to copy. Everything lives at
         <a href="https://github.com/libreble">github.com/libreble</a>.</p>
+
+      <div class="ask">
+        <h3>Not a builder? Ask for a device.</h3>
+        <p>Say which make and model, and what its app holds hostage. Requests are a wish list,
+          not a queue — but if you own the device and can help capture what it says on the air,
+          things move a lot faster.</p>
+        <p class="links">
+          <a class="primary" href="https://github.com/libreble/libreble.github.io/issues/new?template=device-request.yml">Request a device</a>
+          <a href="https://github.com/libreble/libreble.github.io/labels/device%20request">Open requests</a>
+        </p>
+      </div>
     </div>
   </section>
 

@@ -23,7 +23,7 @@ EOF
   echo "rendered $name.png ($(identify -format '%wx%h' "$HERE/$name.png"))"
 }
 
-render libreble   "Web Bluetooth, no vendor in between" "Your devices, without their vendors." \
+render libreble   "Web Bluetooth, no vendor in between" "Your devices, set free." \
   "Web apps that talk to Bluetooth gadgets directly, in Chrome. No account, no cloud, every protocol documented." ""
 render bikefit    "ICG IC-6 indoor bike" "Bikefit" \
   "Live power, cadence, heart rate and zones, session history on your device, TCX export." bikefit
