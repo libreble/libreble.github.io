@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         The list is for apps that follow the four rules — direct to the device over Web Bluetooth,
-        data stays on the user's device, installable PWA, no trackers — and that ship a protocol
+        data stays on the user's device, installable PWA, no ads or trackers — and that ship a protocol
         write-up other people can implement from. Open source; MIT is what the rest use.
   - type: input
     id: device
@@ -57,5 +57,5 @@ body:
       options:
         - label: It talks to the device directly over Web Bluetooth — no server in between
         - label: Data stays on the user's device; no network requests at runtime
-        - label: No analytics, crash reporting or telemetry of any kind
+        - label: No ads, analytics, crash reporting or telemetry of any kind
         - label: Only the on-air protocol is reproduced; no vendor code is included
