@@ -44,6 +44,7 @@ body:
       options:
         - label: I can capture the Bluetooth traffic between the vendor app and the device
         - label: I can test builds against the real device and paste back diagnostics
+        - label: I can send one over for development
   - type: textarea
     id: prior
     attributes:
