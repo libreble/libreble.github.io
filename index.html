@@ -465,6 +465,40 @@
     .ask h3 { font-weight: 700; font-stretch: 106%; font-size: 1.125rem; letter-spacing: -0.01em; margin-bottom: 8px; }
     .ask p { color: var(--ink-2); font-size: 0.9375rem; line-height: 1.5; text-wrap: pretty; }
     .ask .links { margin-top: 14px; }
+    /* ---- run your own ---- */
+    .selfhost { max-width: 40em; }
+    .cap {
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin: 0 0 6px;
+    }
+    .cap:not(:first-child) { margin-top: 24px; }
+    pre.term {
+      margin: 0;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-top: 2px solid var(--ink);
+      overflow-x: auto;
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    pre.term code { background: none; border: 0; padding: 0; font-size: inherit; }
+    pre.term .c { color: var(--muted); }
+    .facts { list-style: none; margin: 28px 0 0; padding: 0; }
+    .facts li {
+      padding-block: 12px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-2);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      text-wrap: pretty;
+    }
+    .facts li:first-child { border-top: 2px solid var(--ink); }
+    .facts li strong { display: block; color: var(--ink); font-weight: 700; font-stretch: 106%; margin-bottom: 2px; }
     .steps li strong { display: block; color: var(--ink); font-weight: 700; font-stretch: 106%; font-size: 1.0625rem; margin-bottom: 2px; }
     code {
       font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -672,6 +706,55 @@
       </ul>
       <p class="note">On iPhone and iPad a Web Bluetooth-capable browser such as Bluefy can work,
         but it isn't a supported target.</p>
+    </div>
+  </section>
+
+  <section id="self-host" class="row">
+    <div class="rail">
+      <h2>Run your own</h2>
+      <p class="sub">Every app is a static site with no backend. If you'd rather not depend on this
+        one, run a copy on your own machine or server — it's the same app.</p>
+    </div>
+    <div class="selfhost">
+      <p class="cap">One app</p>
+      <pre class="term"><code>docker run -d -p 8080:8080 ghcr.io/libreble/brushlog
+<span class="c"># open http://localhost:8080 — or swap in bikefit, collet, multimeter</span></code></pre>
+
+      <p class="cap">All four · compose.yaml</p>
+      <pre class="term"><code>services:
+  bikefit:
+    image: ghcr.io/libreble/bikefit
+    ports: ["8081:8080"]
+    restart: unless-stopped
+  brushlog:
+    image: ghcr.io/libreble/brushlog
+    ports: ["8082:8080"]
+    restart: unless-stopped
+  collet:
+    image: ghcr.io/libreble/collet
+    ports: ["8083:8080"]
+    restart: unless-stopped
+  multimeter:
+    image: ghcr.io/libreble/multimeter
+    ports: ["8084:8080"]
+    restart: unless-stopped
+<span class="c"># then: docker compose up -d → http://localhost:8081 … 8084</span></code></pre>
+
+      <ul class="facts">
+        <li><strong>The images</strong> Small nginx images on the GitHub Container Registry, for
+          amd64 and arm64 — a Raspberry Pi is plenty. Tags follow releases: <code>latest</code>,
+          <code>1.0</code>, <code>1.0.0</code>. Pin one if you'd rather update on your own schedule.</li>
+        <li><strong>Without Docker</strong> Build the app and put its <code>dist/</code> folder on any
+          static web server. Each repo's README has the steps:
+          <a href="https://github.com/libreble/bikefit#self-host" target="_blank" rel="noopener">Bikefit</a>,
+          <a href="https://github.com/libreble/brushlog#self-host" target="_blank" rel="noopener">Brushlog</a>,
+          <a href="https://github.com/libreble/collet#self-host" target="_blank" rel="noopener">COLLET</a>,
+          <a href="https://github.com/libreble/multimeter#self-host" target="_blank" rel="noopener">Multimeter</a>.</li>
+        <li><strong>HTTPS for phones</strong> Browsers only allow Bluetooth on secure pages.
+          <code>localhost</code> counts, so it works on the computer running it. A phone opening
+          <code>http://192.168.1.20:8080</code> will load the app but can't connect — put it behind
+          a reverse proxy with a real certificate, or use <code>tailscale serve</code>.</li>
+      </ul>
     </div>
   </section>
 
